@@ -1,0 +1,67 @@
+<div class="container">
+  
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" class="form-control" #name="ngModel" [class.is-invalid]="name.invalid && name.touched"
+      name="name" [(ngModel)]="userModel.name" required>
+      <small class="text-danger" [class.d-none]="name.valid || name.untouched">name is required</small>
+    </div>
+    
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" class="form-control" #email="ngModel" name="email" [class.is-invalid]="email.invalid && email.touched"
+      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="userModel.email" required>
+      <div *ngIf=" email.errors && (email.invalid || email.touched)">
+        <small class="text-danger" *ngIf="email.errors.required">email is required</small>
+        <small class="text-danger" *ngIf="email.errors.pattern">email must be proper</small>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label>Phone:</label>
+      <input type="tel" class="form-control" #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched"
+      name="phone"  [(ngModel)]="userModel.phone" pattern="^\d{10}$" required>
+      <div *ngIf=" phone.errors && (phone.invalid || phone.touched)">
+        <small class="text-danger" *ngIf="phone.errors.required">phone is required</small>
+        <small class="text-danger" *ngIf="phone.errors.pattern">phone must be 10 digits</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Address:</label>
+      <input type="text" class="form-control" #address="ngModel" [class.is-invalid]="address.invalid && phone.touched"
+      name="address"  [(ngModel)]="userModel.address" required>
+      <small class="text-danger" [class.d-none]="address.valid || address.untouched">address is required</small>
+    </div>  
+    
+    <div class="form-group">
+      <label>User Name:</label>
+      <input type="text" class="form-control" #userName="ngModel" [class.is-invalid]="userName.invalid && userName.touched"
+      name="userName" [(ngModel)]="userModel.userName" required>
+      <small class="text-danger" [class.d-none]="userName.valid || userName.untouched">userName is required</small>
+    </div>
+    
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" class="form-control" #pass="ngModel" [class.is-invalid]="pass.invalid && pass.touched"
+      name="pass" [(ngModel)]="userModel.pass" required>
+      <small class="text-danger" [class.d-none]="pass.valid || pass.untouched">password is required</small>
+    </div>
+    
+    <div class="form-group">
+      <label>Confirm Password</label>
+      <input type="password" class="form-control" #cPassword="ngModel" [class.is-invalid]="cPassword.invalid && cPassword.touched"
+      name="cPassword" [(ngModel)]="userModel.cPassword" required>
+      <small class="text-danger" [class.d-none]="cPassword.valid || cPassword.untouched">password is required</small>
+    </div>
+    
+    <div>
+      <button [disabled]="userForm.form.invalid || topicHasError" class="btn btn-primary" type="submit">SUMBIT</button>
+    </div>
+
+  </form>
+
+  <h3 *ngIf=submitted>Form Succesfully Submitted</h3>
+
+</div>
